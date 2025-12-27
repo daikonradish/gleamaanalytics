@@ -1,8 +1,9 @@
-import requests
-from datetime import (date, datetime)
 import time
+from datetime import date, datetime
 
-projects = [ 
+import requests
+
+projects = [
     ("lpil", "aws4_request"),
     ("Cyteon", "discord_gleam"),
     ("lpil", "glatus"),
@@ -205,32 +206,43 @@ projects = [
     ("0riginaln0", "lite-xl-gleam"),
 ]
 
+
 def format_url(contributor, pkgname):
-    return 'https://api.github.com/repos/{0}/{1}'.format(contributor, pkgname)
+    return "https://api.github.com/repos/{0}/{1}".format(contributor, pkgname)
+
 
 def get_last_3_commit_dates(url, headers):
-    response = requests.get(url + '/commits?per_page=3', headers=headers)
-    datestrs = [j['commit']['committer']['date'] for j in response.json()]
+    response = requests.get(url + "/commits?per_page=3", headers=headers)
+    datestrs = [j["commit"]["committer"]["date"] for j in response.json()]
     return [format_yymmdd(dtsr) for dtsr in datestrs]
+
 
 def get_repo_info(url, headers):
     response = requests.get(url, headers=headers)
     js = response.json()
-    return ([js['archived'], js['forks_count'], js['stargazers_count'], format_yymmdd(js['created_at'])])
-    
+    return [
+        js["archived"],
+        js["forks_count"],
+        js["stargazers_count"],
+        format_yymmdd(js["created_at"]),
+    ]
+
+
 def number_of_days_since(datestring):
     backthen = datetime.fromisoformat(datestring).date()
     today = date.today()
     return (today - backthen).days
 
+
 def format_yymmdd(datestring):
     dt = datetime.fromisoformat(datestring).date()
     return dt.strftime("%Y-%m-%d")
 
+
 if __name__ == "__main__":
     custom_headers = {
-        'Authorization': 'Bearer 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',
-        'Accept': 'application/vnd.github+json'
+        "Authorization": "Bearer <ADD YOUR GITHUB TOKEN HERE.>",
+        "Accept": "application/vnd.github+json",
     }
     for contributor, pkgname in projects:
         time.sleep(1)
