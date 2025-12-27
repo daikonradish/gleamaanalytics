@@ -12,6 +12,7 @@ Gleam doesn't have a large core language. So it is essential that there be a vib
 
 Is it true that people will contribute? I took a snapshot of the ~200 packages on Awesome Gleam on 2025-12-18 and pulled some data using the Github API. The [data tell a different story](graphs/days-since-commit.png). The median number of months since the last commit was 5.49. In other words, 50% of all packages on Awesome Gleam have not been updated in 5.5 months, as of 2025-12-18.
 
+![Months Since Last Commit](path/to/your/image.png)
 
 # Usage
 
